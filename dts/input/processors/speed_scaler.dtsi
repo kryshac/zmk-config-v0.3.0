@@ -14,15 +14,15 @@
         codes = <INPUT_REL_X INPUT_REL_Y>;
         track-remainders;
 
-        low-speed = <250>;
-        high-speed = <900>;
+        low-speed = <300>;
+        high-speed = <1300>;
         timeout-ms = <25>;
         minimum-dt-ms = <4>;
 
         slow-multiplier = <1>;
         slow-divisor = <3>;
-        medium-multiplier = <2>;
-        medium-divisor = <3>;
+        medium-multiplier = <3>;
+        medium-divisor = <4>;
         fast-multiplier = <1>;
         fast-divisor = <1>;
     };

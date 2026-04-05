@@ -118,17 +118,21 @@ static int speed_scaler_handle_event(const struct device *dev, struct input_even
 
     uint8_t mul = cfg->slow_mul;
     uint8_t div = cfg->slow_div;
+    const char *band = "slow";
 
     if (listener->last_speed >= cfg->high_speed) {
         mul = cfg->fast_mul;
         div = cfg->fast_div;
+        band = "fast";
     } else if (listener->last_speed >= cfg->low_speed) {
         mul = cfg->medium_mul;
         div = cfg->medium_div;
+        band = "medium";
     }
 
-    LOG_DBG("listener=%d code=%d value=%d speed=%d scale=%d/%d", state->input_device_index,
-            event->code, event->value, listener->last_speed, mul, div);
+    LOG_DBG("listener=%d code=%d value=%d speed=%d band=%s scale=%d/%d",
+            state->input_device_index, event->code, event->value, listener->last_speed, band, mul,
+            div);
 
     return scale_val(event, mul, div, state);
 }
