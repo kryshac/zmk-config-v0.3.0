@@ -1,0 +1,29 @@
+/*
+ * Copyright (c) 2026
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+#include <zephyr/dt-bindings/input/input-event-codes.h>
+
+/ {
+    /omit-if-no-ref/ zip_xy_speed_scaler: zip_xy_speed_scaler {
+        compatible = "zmk,input-processor-speed-scaler";
+        #input-processor-cells = <0>;
+        type = <INPUT_EV_REL>;
+        codes = <INPUT_REL_X INPUT_REL_Y>;
+        track-remainders;
+
+        low-speed = <250>;
+        high-speed = <900>;
+        timeout-ms = <25>;
+        minimum-dt-ms = <4>;
+
+        slow-multiplier = <1>;
+        slow-divisor = <3>;
+        medium-multiplier = <2>;
+        medium-divisor = <3>;
+        fast-multiplier = <1>;
+        fast-divisor = <1>;
+    };
+};

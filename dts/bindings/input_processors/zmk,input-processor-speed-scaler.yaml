@@ -1,0 +1,46 @@
+# Copyright (c) 2026
+# SPDX-License-Identifier: MIT
+
+description: Input processor for speed-based pointer scaling
+
+compatible: "zmk,input-processor-speed-scaler"
+
+include: ip_zero_param.yaml
+
+properties:
+  type:
+    type: int
+    required: true
+  codes:
+    type: array
+    required: true
+  low-speed:
+    type: int
+    required: true
+  high-speed:
+    type: int
+    required: true
+  timeout-ms:
+    type: int
+    required: true
+  minimum-dt-ms:
+    type: int
+    required: true
+  slow-multiplier:
+    type: int
+    required: true
+  slow-divisor:
+    type: int
+    required: true
+  medium-multiplier:
+    type: int
+    required: true
+  medium-divisor:
+    type: int
+    required: true
+  fast-multiplier:
+    type: int
+    required: true
+  fast-divisor:
+    type: int
+    required: true

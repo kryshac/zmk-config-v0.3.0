@@ -1,0 +1,8 @@
+if INPUT
+
+config ZMK_INPUT_PROCESSOR_SPEED_SCALER
+    bool "ZMK input processor speed scaler"
+    default y
+    depends on DT_HAS_ZMK_INPUT_PROCESSOR_SPEED_SCALER_ENABLED
+
+endif
