@@ -1,1 +1,7 @@
+config CHARYBDIS_LED_RENDERER
+    bool "Build Charybdis LED renderer"
+    select LED_STRIP
+    select SPI
+    select WS2812_STRIP
+
 rsource "drivers/Kconfig"

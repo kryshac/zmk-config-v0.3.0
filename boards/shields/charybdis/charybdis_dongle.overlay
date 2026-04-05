@@ -3,8 +3,6 @@
 / {
     chosen {
         zmk,kscan = &mock_kscan;
-        zephyr,console = &snippet_studio_rpc_usb_uart;
-        zephyr,shell-uart = &snippet_studio_rpc_usb_uart;
     };
 
     mock_kscan: kscan_1 {

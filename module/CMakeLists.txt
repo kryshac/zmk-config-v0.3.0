@@ -1,5 +1,15 @@
 add_subdirectory(drivers)
 
-target_sources_ifdef(CONFIG_ZMK_RGB_UNDERGLOW app PRIVATE
-    layer_color.c
+if(CONFIG_CHARYBDIS_LED_RENDERER)
+    target_sources(app PRIVATE
+        layer_color.c
+    )
+else()
+    target_sources(app PRIVATE
+        layer_color_stub.c
+    )
+endif()
+
+target_sources(app PRIVATE
+    layer_color_sync.c
 )
