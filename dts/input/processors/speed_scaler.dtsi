@@ -15,14 +15,14 @@
         track-remainders;
 
         low-speed = <300>;
-        high-speed = <1300>;
-        timeout-ms = <25>;
-        minimum-dt-ms = <4>;
+        high-speed = <1700>;
+        timeout-ms = <35>;
+        minimum-dt-ms = <5>;
 
         slow-multiplier = <1>;
-        slow-divisor = <3>;
-        medium-multiplier = <3>;
-        medium-divisor = <4>;
+        slow-divisor = <5>;
+        medium-multiplier = <2>;
+        medium-divisor = <3>;
         fast-multiplier = <1>;
         fast-divisor = <1>;
     };
