@@ -66,6 +66,8 @@
 
     kscan0: kscan {
         diode-direction = "row2col";
+        debounce-press-ms = <1>;
+        debounce-release-ms = <5>;
     };
 
     split_inputs {

@@ -119,12 +119,18 @@ static struct led_rgb hsb_to_rgb(struct charybdis_led_hsb color) {
     }
 }
 
-static const struct charybdis_led_hsb *layer_led_map(uint8_t layer) {
-    if (layer < (sizeof(layer_leds) / sizeof(layer_leds[0]))) {
-        return layer_leds[layer];
-    }
+#define CHARYBDIS_LED_LAYER_COUNT (sizeof(layer_leds) / sizeof(layer_leds[0]))
 
-    return layer_leds[CHARYBDIS_LED_LAYER_BASE];
+static struct led_rgb precomputed_pixels[CHARYBDIS_LED_LAYER_COUNT][CHARYBDIS_LED_COUNT];
+static bool pixels_ready;
+
+static void precompute_all_pixels(void) {
+    for (int layer = 0; layer < CHARYBDIS_LED_LAYER_COUNT; layer++) {
+        for (int i = 0; i < CHARYBDIS_LED_COUNT; i++) {
+            precomputed_pixels[layer][i] = hsb_to_rgb(layer_leds[layer][i]);
+        }
+    }
+    pixels_ready = true;
 }
 
 static int update_leds(uint8_t layer) {
@@ -133,14 +139,12 @@ static int update_leds(uint8_t layer) {
         return -ENODEV;
     }
 
-    struct led_rgb pixels[CHARYBDIS_LED_COUNT];
-    const struct charybdis_led_hsb *map = layer_led_map(layer);
-
-    for (int i = 0; i < CHARYBDIS_LED_COUNT; i++) {
-        pixels[i] = hsb_to_rgb(map[i]);
+    if (!pixels_ready) {
+        precompute_all_pixels();
     }
 
-    return led_strip_update_rgb(led_strip, pixels, CHARYBDIS_LED_COUNT);
+    uint8_t idx = (layer < CHARYBDIS_LED_LAYER_COUNT) ? layer : CHARYBDIS_LED_LAYER_BASE;
+    return led_strip_update_rgb(led_strip, precomputed_pixels[idx], CHARYBDIS_LED_COUNT);
 #else
     ARG_UNUSED(layer);
     return -ENOTSUP;
