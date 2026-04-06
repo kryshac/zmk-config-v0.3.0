@@ -25,10 +25,10 @@
         device = <&trackball_split>;
         input-processors = <&zip_xy_speed_scaler>;
 
-        snipe {
-            layers = <Mouse>;
-            input-processors = <&zip_xy_scaler 1 5>;
-        };
+        // snipe {
+        //     layers = <Mouse>;
+        //     input-processors = <&zip_xy_scaler 1 5>;
+        // };
 
         scroll {
             layers = <Mouse>;
