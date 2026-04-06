@@ -17,6 +17,7 @@
 #define Fun 6
 #define Button 7
 #define I3 8
+#define I3Num 9
 
 / {
     trackball_listener {
@@ -146,10 +147,19 @@
 
         I3 {
             bindings = <
+            &kp LG(Q)            &kp LG(W)            &kp LG(E)            &kp LG(R)            &kp LG(T)                         &kp LG(Y)            &kp LG(U)              &kp LG(I)              &kp LG(O)              &kp LG(P)
+            &kp LG(A)            &kp LG(S)            &kp LG(D)            &kp LG(F)            &kp LG(G)                         &kp LG(H)            &kp LG(J)              &kp LG(K)              &kp LG(L)              &kp LG(SEMICOLON)
+            &kp LG(Z)            &kp LG(X)            &kp LG(C)            &kp LG(V)            &kp LG(B)                         &kp LG(N)            &kp LG(M)              &kp LG(COMMA)          &kp LG(DOT)            &kp LG(SLASH)
+                                                      &mo I3Num            &kp LSHIFT           &kp LCTRL                         &trans               &kp RSHIFT
+            >;
+        };
+
+        I3Num {
+            bindings = <
             &kp LG(NUMBER_1)     &kp LG(NUMBER_2)     &kp LG(NUMBER_3)     &kp LG(NUMBER_4)     &kp LG(NUMBER_5)                  &kp LG(NUMBER_6)     &kp LG(NUMBER_7)       &kp LG(NUMBER_8)       &kp LG(NUMBER_9)       &kp LG(NUMBER_0)
-            &kp LG(ENTER)        &kp LG(D)            &kp LG(LS(Q))        &kp LG(F)            &kp LG(V)                         &kp LG(H)            &kp LG(J)              &kp LG(K)              &kp LG(L)              &kp LG(SEMICOLON)
-            &trans               &kp LG(LS(H))        &kp LG(LS(J))        &kp LG(LS(K))        &kp LG(LS(L))                     &kp LG(SPACE)        &kp LG(LS(SPACE))      &kp LG(E)              &kp LG(LS(MINUS))      &kp LG(MINUS)
-                                                      &trans               &kp LSHIFT           &kp LCTRL                         &trans               &kp RSHIFT
+            &trans               &trans               &trans               &trans               &trans                            &trans               &trans                 &trans                 &trans                 &trans
+            &trans               &trans               &trans               &trans               &trans                            &trans               &trans                 &trans                 &trans                 &trans
+                                                      &trans               &trans               &trans                            &kp NUMBER_0         &kp DOT
             >;
         };
     };

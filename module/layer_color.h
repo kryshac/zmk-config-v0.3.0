@@ -12,6 +12,7 @@ enum charybdis_led_layer {
     CHARYBDIS_LED_LAYER_FUN = 6,
     CHARYBDIS_LED_LAYER_BUTTON = 7,
     CHARYBDIS_LED_LAYER_I3 = 8,
+    CHARYBDIS_LED_LAYER_I3_NUM = 9,
 };
 
 int charybdis_layer_color_apply(uint8_t layer);

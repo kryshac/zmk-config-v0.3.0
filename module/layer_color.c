@@ -86,6 +86,11 @@ static const struct charybdis_led_hsb layer_leds[][CHARYBDIS_LED_COUNT] = {
         i3_color, i3_color, i3_color, i3_color, i3_color, i3_color,
         i3_color, i3_color, i3_color, off_color, off_color, off_color,
     },
+    [CHARYBDIS_LED_LAYER_I3_NUM] = {
+        off_color, off_color, off_color, off_color, off_color, off_color,
+        off_color, off_color, off_color, num_color, num_color, num_color,
+        num_color, num_color, num_color, num_color, num_color, num_color,
+    },
 };
 
 static struct led_rgb hsb_to_rgb(struct charybdis_led_hsb color) {
