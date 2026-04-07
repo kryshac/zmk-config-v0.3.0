@@ -8,16 +8,14 @@
 #include <input/processors/speed_scaler.dtsi>
 #include <dt-bindings/zmk/input_transform.h>
 
-#define Base 0
-#define Lower 1
-#define Raise 2
-#define Mouse 3
-#define Sym 4
-#define Num 5
-#define Fun 6
-#define Button 7
-#define I3 8
-#define I3Num 9
+#define BASE 0
+#define NUFU 1
+#define SYM 2
+#define NAV 3
+#define MED 4
+#define POI 5
+#define SCR 6
+#define SNI 7
 
 / {
     trackball_listener {
@@ -25,14 +23,14 @@
         device = <&trackball_split>;
         input-processors = <&zip_xy_speed_scaler>;
 
-        // snipe {
-        //     layers = <Mouse>;
-        //     input-processors = <&zip_xy_scaler 1 5>;
-        // };
-
         scroll {
-            layers = <Mouse>;
+            layers = <SCR>;
             input-processors = <&zip_xy_scaler 1 3>, <&zip_xy_to_scroll_mapper>, <&zip_scroll_transform (INPUT_TRANSFORM_Y_INVERT)>;
+        };
+
+        snipe {
+            layers = <SNI>;
+            input-processors = <&zip_xy_scaler 1 5>;
         };
     };
 
@@ -47,6 +45,7 @@
                 <&kp>,
                 <&kp>;
         };
+
 
         lt: layer_tap {
             compatible = "zmk,behavior-hold-tap";
@@ -69,98 +68,188 @@
     keymap {
         compatible = "zmk,keymap";
 
+
+        // 0
         Base {
+            label = "Base";
             bindings = <
-            &kp Q       &kp W       &kp E         &kp R         &kp T                       &kp Y             &kp U         &kp I         &kp O         &kp P
-            &hm LGUI A  &hm LALT S  &hm LCTRL D   &hm LSHIFT F  &kp G                       &kp H             &hm RSHFT J   &hm RCTRL K   &hm RALT L    &hm RGUI SEMICOLON
-            &kp Z       &kp X       &kp C         &kp V         &kp B                       &kp N             &kp M         &kp COMMA     &kp DOT       &lt 7 SLASH
-                                    &lt 1 ESCAPE  &lt 2 TAB     &lt 3 SPACE                 &lt 8 BACKSPACE   &lt 5 ENTER
+              &kp       Q  &kp       W  &kp          E  &kp         R  &kp T               &kp     Y  &kp             U  &kp        I  &kp       O  &kp               P
+              &hm  LGUI A  &hm  LALT S  &hm    LCTRL D  &hm  LSHIFT F  &kp G               &kp     H  &hm       RSHFT J  &hm  RCTRL K  &hm  RALT L  &hm  RGUI SEMICOLON
+              &lt   POI Z  &kp       X  &kp          C  &kp         V  &kp B               &kp     N  &kp             M  &kp    COMMA  &kp     DOT  &lt       POI SLASH
+                                        &lt MED ESCAPE  &lt NAV SPACE  &lt NUFU TAB        &kp ENTER  &lt SYM BACKSPACE
             >;
         };
 
-        Lower {
+        // 1
+        NuFu {
+            label = "Numeral/Function";
             bindings = <
-            &kp TILDE        &kp EXCL       &kp AT         &kp HASH      &kp DOLLAR            &kp PERCENT            &kp CARET        &kp AMPERSAND   &kp ASTERISK &kp PIPE
-            &trans           &trans         &trans         &trans        &kp LEFT_BRACE        &kp RIGHT_BRACE        &kp NUMBER_7     &kp NUMBER_8    &kp NUMBER_9 &kp SLASH
-            &trans           &kp HOME       &kp PAGE_UP    &kp PAGE_DOWN &kp END               &kp LEFT_BRACKET      &kp NUMBER_4     &kp NUMBER_5    &kp NUMBER_6 &kp MINUS
-            &trans           &trans         &trans         &trans        &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS &kp NUMBER_1     &kp NUMBER_2    &kp NUMBER_3 &kp PLUS
-                                                                              &trans         &trans        &trans         &kp NUMBER_0   &kp DOT
+                &trans  &kp F7  &kp F8  &kp F9 &kp F12        &trans  &kp N7  &kp N8  &kp N9  &kp DELETE
+                &trans  &kp F4  &kp F5  &kp F6 &kp F11        &trans  &kp N4  &kp N5  &kp N6  &kp BACKSPACE
+                &trans  &kp F1  &kp F2  &kp F3 &kp F10        &trans  &kp N1  &kp N2  &kp N3  &trans
+                                &trans  &trans  &trans        &trans &kp N0 
             >;
         };
 
-        Raise {
+        // 2
+        Symbol {
+            label = "Symbol";
             bindings = <
-            &kp F12          &kp F1         &kp F2         &kp F3         &kp F4                &kp F5                  &kp F6           &kp F7          &kp F8       &kp F9
-            &kp C_MUTE       &trans         &kp C_BRI_UP   &kp C_BRI_DN   &trans                &kp LEFT_BRACE          &kp NUMBER_7     &kp NUMBER_8    &kp NUMBER_9 &kp SLASH
-            &kp C_VOL_UP     &kp LEFT       &kp UP         &kp DOWN       &kp RIGHT             &kp LEFT_BRACKET        &kp NUMBER_4     &kp NUMBER_5    &kp NUMBER_6 &kp MINUS
-            &kp C_VOL_DN     &kp C_PREVIOUS &kp C_PLAY_PAUSE &kp C_NEXT   &trans                &kp LEFT_PARENTHESIS    &kp NUMBER_1     &kp NUMBER_2    &kp NUMBER_3 &kp EQUAL
-                                                                              &trans         &kp PRINTSCREEN &trans       &kp NUMBER_0   &kp DOT
+              &kp TILDE &kp AMPS  &kp STAR   &trans    &kp PLUS        &trans &kp LBRC  &kp RBRC  &trans  &kp PIPE
+              &kp MINUS &kp DLLR  &kp PRCNT  &kp CARET &kp EQUAL       &trans &kp LPAR  &kp RPAR  &kp DQT &kp APOS
+              &kp UNDER &kp EXCL  &kp AT     &kp HASH  &kp GRAVE       &trans &kp LBKT  &kp RBKT  &trans  &kp BSLH
+                                  &trans     &trans    &trans          &trans &trans
             >;
         };
 
         // 3
-        Mouse {
+        Navigation {
+            label = "Navigation";
             bindings = <
-            &trans    &trans      &trans      &trans      &trans              &trans         &trans     &trans     &trans     &trans
-            &trans    &trans      &trans      &trans      &trans              &trans         &trans     &trans     &trans     &trans
-            &trans    &mkp LCLK   &mkp MCLK   &mkp RCLK   &trans              &trans         &mkp LCLK  &mkp MCLK  &mkp RCLK  &trans
-                                  &trans      &trans      &trans              &trans         &trans
+                         &trans  &trans  &trans  &trans  &trans         &trans    &trans         &kp TAB      &trans    &kp DELETE
+                         &trans  &trans  &trans  &trans  &trans         &kp LEFT  &kp DOWN       &kp UP       &kp RIGHT &kp BACKSPACE
+                         &trans  &trans  &trans  &trans  &trans         &kp HOME  &kp PAGE_DOWN  &kp PAGE_UP  &kp END   &kp INS
+                                         &trans  &trans  &trans         &trans    &trans
             >;
         };
 
-        Sym {
+        // 4
+        Media {
+            label = "Media";
             bindings = <
-            &kp LEFT_BRACE  &kp AMPERSAND  &kp ASTERISK          &kp LEFT_PARENTHESIS   &kp RIGHT_BRACE       &trans      &trans     &trans    &trans    &trans  
-            &kp COLON       &kp DOLLAR     &kp PERCENT           &kp CARET              &kp PLUS              &trans  &kp RSHIFT  &kp RCTRL  &kp RALT  &kp RGUI  
-            &kp TILDE       &kp EXCL       &kp AT                &kp HASH               &kp PIPE              &trans      &trans     &trans    &trans    &trans  
-                                           &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp UNDERSCORE        &trans      &trans
+              &trans     &trans        &bt BT_CLR_ALL &trans       &trans            &trans      &trans        &bt BT_CLR_ALL  &trans        &trans
+              &kp C_PREV &kp C_VOL_DN  &kp C_MUTE     &kp C_VOL_UP &kp C_NEXT        &kp C_PREV  &kp C_VOL_DN  &kp C_MUTE      &kp C_VOL_UP  &kp C_NEXT
+              &trans     &trans        &trans         &trans       &trans            &trans      &trans        &trans          &trans        &trans
+                                       &trans    &kp C_PLAY_PAUSE  &kp C_STOP        &kp C_STOP  &kp C_PLAY_PAUSE
             >;
         };
 
         // 5
-        Num {
+        Pointer {
+            label = "Pointer";
             bindings = <
-            &kp LEFT_BRACKET  &kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &kp RIGHT_BRACKET       &trans      &trans     &trans    &trans    &trans  
-            &kp SEMICOLON     &kp NUMBER_4  &kp NUMBER_5  &kp NUMBER_6  &kp EQUAL               &trans  &kp RSHIFT  &kp RCTRL  &kp RALT  &kp RGUI  
-            &kp GRAVE         &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp BACKSLASH           &trans      &trans     &trans    &trans    &trans  
-                                            &kp SQT       &kp NUMBER_0  &kp MINUS               &trans      &trans
+              &trans       &trans       &trans        &trans        &trans               &trans &trans        &trans        &trans       &trans
+              &kp LGUI     &kp LALT     &kp LCTRL     &kp LSHIFT    &trans               &trans &kp RSHFT     &kp RCTRL     &kp RALT     &kp RGUI
+              &trans       &mo SCR      &mo SNI       &trans        &trans               &trans &trans        &tog SNI      &tog SCR     &trans
+                                            &mkp RCLK  &mkp LCLK  &mkp MCLK         &mkp MCLK  &mkp LCLK
             >;
         };
 
-        Fun {
+        // 6
+        Scroll {
+            label = "Scroll";
             bindings = <
-            &kp F12     &kp F7   &kp F8      &kp F9   &kp PRINTSCREEN          &trans      &trans     &trans    &trans    &trans  
-            &kp F11     &kp F4   &kp F5      &kp F6   &kp SCROLLLOCK           &trans  &kp RSHIFT  &kp RCTRL  &kp RALT  &kp RGUI  
-            &kp F10     &kp F1   &kp F2      &kp F3   &kp PAUSE_BREAK          &trans      &trans     &trans    &trans    &trans  
-                                 &kp C_MENU  &kp TAB  &kp SPACE                &trans      &trans
+                &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
+                &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
+                &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
+                                &trans  &trans  &trans    &trans  &trans
             >;
         };
 
-        Button {
+        // 7
+        Sniper {
+            label = "Sniper";
             bindings = <
-            &bt BT_CLR            &bootloader         &trans              &trans          &bt BT_SEL 0       &out OUT_TOG  &out OUT_USB   &out OUT_BLE  &trans          &trans
-            &kp LGUI              &kp LALT            &trans              &trans          &bt BT_SEL 1       &trans        &kp RSHIFT     &kp RCTRL     &kp RALT        &kp RGUI
-            &ext_power EP_TOG     &ext_power EP_ON    &trans              &trans          &bt BT_SEL 2       &trans        &mkp LCLK      &mkp MCLK      &mkp RCLK       &trans
-                                                      &mkp LCLK           &mkp MCLK       &mkp RCLK              &mkp MB4      &mkp MB5
+                &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
+                &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
+                &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
+                                &trans  &trans  &trans    &trans  &trans
             >;
         };
 
-        I3 {
-            bindings = <
-            &kp LG(Q)            &kp LG(W)            &kp LG(E)            &kp LG(R)            &kp LG(T)                         &kp LG(Y)            &kp LG(U)              &kp LG(I)              &kp LG(O)              &kp LG(P)
-            &kp LG(A)            &kp LG(S)            &kp LG(D)            &kp LG(F)            &kp LG(G)                         &kp LG(H)            &kp LG(J)              &kp LG(K)              &kp LG(L)              &kp LG(SEMICOLON)
-            &kp LG(Z)            &kp LG(X)            &kp LG(C)            &kp LG(V)            &kp LG(B)                         &kp LG(N)            &kp LG(M)              &kp LG(COMMA)          &kp LG(DOT)            &kp LG(SLASH)
-                                                      &mo I3Num            &kp LSHIFT           &kp LCTRL                         &trans               &kp RSHIFT
-            >;
-        };
-
-        I3Num {
-            bindings = <
-            &kp LG(NUMBER_1)     &kp LG(NUMBER_2)     &kp LG(NUMBER_3)     &kp LG(NUMBER_4)     &kp LG(NUMBER_5)                  &kp LG(NUMBER_6)     &kp LG(NUMBER_7)       &kp LG(NUMBER_8)       &kp LG(NUMBER_9)       &kp LG(NUMBER_0)
-            &trans               &trans               &trans               &trans               &trans                            &trans               &trans                 &trans                 &trans                 &trans
-            &trans               &trans               &trans               &trans               &trans                            &trans               &trans                 &trans                 &trans                 &trans
-                                                      &trans               &trans               &trans                            &kp NUMBER_0         &kp DOT
-            >;
-        };
+        // Base {
+        //     bindings = <
+        //     &kp Q       &kp W       &kp E         &kp R         &kp T                       &kp Y             &kp U         &kp I         &kp O         &kp P
+        //     &hm LGUI A  &hm LALT S  &hm LCTRL D   &hm LSHIFT F  &kp G                       &kp H             &hm RSHFT J   &hm RCTRL K   &hm RALT L    &hm RGUI SEMICOLON
+        //     &kp Z       &kp X       &kp C         &kp V         &kp B                       &kp N             &kp M         &kp COMMA     &kp DOT       &lt 7 SLASH
+        //                             &lt 1 ESCAPE  &lt 2 TAB     &lt 3 SPACE                 &lt 8 BACKSPACE   &lt 5 ENTER
+        //     >;
+        // };
+        //
+        // Lower {
+        //     bindings = <
+        //     &kp TILDE        &kp EXCL       &kp AT         &kp HASH      &kp DOLLAR            &kp PERCENT            &kp CARET        &kp AMPERSAND   &kp ASTERISK &kp PIPE
+        //     &trans           &trans         &trans         &trans        &kp LEFT_BRACE        &kp RIGHT_BRACE        &kp NUMBER_7     &kp NUMBER_8    &kp NUMBER_9 &kp SLASH
+        //     &trans           &kp HOME       &kp PAGE_UP    &kp PAGE_DOWN &kp END               &kp LEFT_BRACKET      &kp NUMBER_4     &kp NUMBER_5    &kp NUMBER_6 &kp MINUS
+        //     &trans           &trans         &trans         &trans        &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS &kp NUMBER_1     &kp NUMBER_2    &kp NUMBER_3 &kp PLUS
+        //                                                                       &trans         &trans        &trans         &kp NUMBER_0   &kp DOT
+        //     >;
+        // };
+        //
+        // // 2
+        // Raise {
+        //     bindings = <
+        //     &kp F12          &kp F1         &kp F2         &kp F3         &kp F4                &kp F5                  &kp F6           &kp F7          &kp F8       &kp F9
+        //     &kp C_MUTE       &trans         &kp C_BRI_UP   &kp C_BRI_DN   &trans                &kp LEFT_BRACE          &kp NUMBER_7     &kp NUMBER_8    &kp NUMBER_9 &kp SLASH
+        //     &kp C_VOL_UP     &kp LEFT       &kp UP         &kp DOWN       &kp RIGHT             &kp LEFT_BRACKET        &kp NUMBER_4     &kp NUMBER_5    &kp NUMBER_6 &kp MINUS
+        //     &kp C_VOL_DN     &kp C_PREVIOUS &kp C_PLAY_PAUSE &kp C_NEXT   &trans                &kp LEFT_PARENTHESIS    &kp NUMBER_1     &kp NUMBER_2    &kp NUMBER_3 &kp EQUAL
+        //                                                                       &trans         &kp PRINTSCREEN &trans       &kp NUMBER_0   &kp DOT
+        //     >;
+        // };
+        //
+        // // 3
+        // Mouse {
+        //     bindings = <
+        //     &trans    &trans      &trans      &trans      &trans              &trans         &trans     &trans     &trans     &trans
+        //     &trans    &trans      &trans      &trans      &trans              &trans         &trans     &trans     &trans     &trans
+        //     &trans    &mkp LCLK   &mkp MCLK   &mkp RCLK   &trans              &trans         &mkp LCLK  &mkp MCLK  &mkp RCLK  &trans
+        //                           &trans      &trans      &trans              &trans         &trans
+        //     >;
+        // };
+        //
+        // Sym {
+        //     bindings = <
+        //     &kp LEFT_BRACE  &kp AMPERSAND  &kp ASTERISK          &kp LEFT_PARENTHESIS   &kp RIGHT_BRACE       &trans      &trans     &trans    &trans    &trans  
+        //     &kp COLON       &kp DOLLAR     &kp PERCENT           &kp CARET              &kp PLUS              &trans  &kp RSHIFT  &kp RCTRL  &kp RALT  &kp RGUI  
+        //     &kp TILDE       &kp EXCL       &kp AT                &kp HASH               &kp PIPE              &trans      &trans     &trans    &trans    &trans  
+        //                                    &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp UNDERSCORE        &trans      &trans
+        //     >;
+        // };
+        //
+        // // 5
+        // Num {
+        //     bindings = <
+        //     &kp LEFT_BRACKET  &kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &kp RIGHT_BRACKET       &trans      &trans     &trans    &trans    &trans  
+        //     &kp SEMICOLON     &kp NUMBER_4  &kp NUMBER_5  &kp NUMBER_6  &kp EQUAL               &trans  &kp RSHIFT  &kp RCTRL  &kp RALT  &kp RGUI  
+        //     &kp GRAVE         &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp BACKSLASH           &trans      &trans     &trans    &trans    &trans  
+        //                                     &kp SQT       &kp NUMBER_0  &kp MINUS               &trans      &trans
+        //     >;
+        // };
+        //
+        // Fun {
+        //     bindings = <
+        //     &kp F12     &kp F7   &kp F8      &kp F9   &kp PRINTSCREEN          &trans      &trans     &trans    &trans    &trans  
+        //     &kp F11     &kp F4   &kp F5      &kp F6   &kp SCROLLLOCK           &trans  &kp RSHIFT  &kp RCTRL  &kp RALT  &kp RGUI  
+        //     &kp F10     &kp F1   &kp F2      &kp F3   &kp PAUSE_BREAK          &trans      &trans     &trans    &trans    &trans  
+        //                          &kp C_MENU  &kp TAB  &kp SPACE                &trans      &trans
+        //     >;
+        // };
+        //
+        // Button {
+        //     bindings = <
+        //     &bt BT_CLR            &bootloader         &trans              &trans          &bt BT_SEL 0       &out OUT_TOG  &out OUT_USB   &out OUT_BLE  &trans          &trans
+        //     &kp LGUI              &kp LALT            &trans              &trans          &bt BT_SEL 1       &trans        &kp RSHIFT     &kp RCTRL     &kp RALT        &kp RGUI
+        //     &ext_power EP_TOG     &ext_power EP_ON    &trans              &trans          &bt BT_SEL 2       &trans        &mkp LCLK      &mkp MCLK      &mkp RCLK       &trans
+        //                                               &mkp LCLK           &mkp MCLK       &mkp RCLK              &mkp MB4      &mkp MB5
+        //     >;
+        // };
+        //
+        // I3 {
+        //     bindings = <
+        //     &kp LG(Q)            &kp LG(W)            &kp LG(E)            &kp LG(R)            &kp LG(T)                         &kp LG(Y)            &kp LG(U)              &kp LG(I)              &kp LG(O)              &kp LG(P)
+        //     &kp LG(A)            &kp LG(S)            &kp LG(D)            &kp LG(F)            &kp LG(G)                         &kp LG(H)            &kp LG(J)              &kp LG(K)              &kp LG(L)              &kp LG(SEMICOLON)
+        //     &kp LG(Z)            &kp LG(X)            &kp LG(C)            &kp LG(V)            &kp LG(B)                         &kp LG(N)            &kp LG(M)              &kp LG(COMMA)          &kp LG(DOT)            &kp LG(SLASH)
+        //                                               &mo I3Num            &kp LSHIFT           &kp LCTRL                         &trans               &kp RSHIFT
+        //     >;
+        // };
+        //
+        // I3Num {
+        //     bindings = <
+        //     &kp LG(NUMBER_1)     &kp LG(NUMBER_2)     &kp LG(NUMBER_3)     &kp LG(NUMBER_4)     &kp LG(NUMBER_5)                  &kp LG(NUMBER_6)     &kp LG(NUMBER_7)       &kp LG(NUMBER_8)       &kp LG(NUMBER_9)       &kp LG(NUMBER_0)
+        //     &trans               &trans               &trans               &trans               &trans                            &trans               &trans                 &trans                 &trans                 &trans
+        //     &trans               &trans               &trans               &trans               &trans                            &trans               &trans                 &trans                 &trans                 &trans
+        //                                               &trans               &trans               &trans                            &kp NUMBER_0         &kp DOT
+        //     >;
+        // };
     };
 };
