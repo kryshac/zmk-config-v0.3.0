@@ -29,39 +29,36 @@ static uint8_t rendered_layer = UINT8_MAX;
 #if IS_ENABLED(CONFIG_ZMK_SPLIT) && IS_ENABLED(CONFIG_ZMK_SPLIT_ROLE_CENTRAL)
 
 static uint8_t active_visual_layer(void) {
-    if (zmk_keymap_layer_active(CHARYBDIS_LED_LAYER_BUTTON)) {
-        return CHARYBDIS_LED_LAYER_BUTTON;
+    /* Keep the base palette visible while using the H/S/B tuning layer. */
+    if (zmk_keymap_layer_active(CHARYBDIS_LAYER_SNI)) {
+        return CHARYBDIS_LAYER_BASE;
     }
 
-    if (zmk_keymap_layer_active(CHARYBDIS_LED_LAYER_MOUSE)) {
-        return CHARYBDIS_LED_LAYER_MOUSE;
+    if (zmk_keymap_layer_active(CHARYBDIS_LAYER_SCR)) {
+        return CHARYBDIS_LAYER_SCR;
     }
 
-    if (zmk_keymap_layer_active(CHARYBDIS_LED_LAYER_I3)) {
-        return CHARYBDIS_LED_LAYER_I3;
+    if (zmk_keymap_layer_active(CHARYBDIS_LAYER_POI)) {
+        return CHARYBDIS_LAYER_POI;
     }
 
-    if (zmk_keymap_layer_active(CHARYBDIS_LED_LAYER_RAISE)) {
-        return CHARYBDIS_LED_LAYER_RAISE;
+    if (zmk_keymap_layer_active(CHARYBDIS_LAYER_MED)) {
+        return CHARYBDIS_LAYER_MED;
     }
 
-    if (zmk_keymap_layer_active(CHARYBDIS_LED_LAYER_LOWER)) {
-        return CHARYBDIS_LED_LAYER_LOWER;
+    if (zmk_keymap_layer_active(CHARYBDIS_LAYER_NAV)) {
+        return CHARYBDIS_LAYER_NAV;
     }
 
-    if (zmk_keymap_layer_active(CHARYBDIS_LED_LAYER_FUN)) {
-        return CHARYBDIS_LED_LAYER_FUN;
+    if (zmk_keymap_layer_active(CHARYBDIS_LAYER_SYM)) {
+        return CHARYBDIS_LAYER_SYM;
     }
 
-    if (zmk_keymap_layer_active(CHARYBDIS_LED_LAYER_NUM)) {
-        return CHARYBDIS_LED_LAYER_NUM;
+    if (zmk_keymap_layer_active(CHARYBDIS_LAYER_NUFU)) {
+        return CHARYBDIS_LAYER_NUFU;
     }
 
-    if (zmk_keymap_layer_active(CHARYBDIS_LED_LAYER_SYM)) {
-        return CHARYBDIS_LED_LAYER_SYM;
-    }
-
-    return CHARYBDIS_LED_LAYER_BASE;
+    return CHARYBDIS_LAYER_BASE;
 }
 
 #endif

@@ -11,5 +11,6 @@ else()
 endif()
 
 target_sources(app PRIVATE
+    led_hsb_adjust.c
     layer_color_sync.c
 )
