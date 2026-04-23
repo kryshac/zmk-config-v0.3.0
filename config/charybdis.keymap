@@ -47,9 +47,12 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <240>;
-            quick-tap-ms = <150>;
+            tapping-term-ms = <190>;
+            quick-tap-ms = <140>;
             bindings = <&kp>, <&kp>;
+
+            retro-tap;
+            require-prior-idle-ms = <120>;
         };
 
         lt: layer_tap {
