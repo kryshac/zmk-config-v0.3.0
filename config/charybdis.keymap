@@ -58,11 +58,13 @@
         lt: layer_tap {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            flavor = "balanced";
-            tapping-term-ms = <240>;
-            quick-tap-ms = <150>;
-            hold-while-undecided;
+            flavor = "tap-preferred";
+            tapping-term-ms = <190>;
+            quick-tap-ms = <140>;
             bindings = <&mo>, <&kp>;
+
+            retro-tap;
+            hold-trigger-on-release;
         };
 
         ledsync: ledsync {
