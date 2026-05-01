@@ -2,6 +2,7 @@
 #include <input/processors.dtsi>
 #include <input/processors/speed_scaler.dtsi>
 #include <dt-bindings/zmk/input_transform.h>
+#include <dt-bindings/zmk/rgb.h>
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
@@ -15,13 +16,6 @@
 #define POI 5
 #define SCR 6
 #define SNI 7
-#define LED_HUE_UP 0
-#define LED_HUE_DN 1
-#define LED_SAT_UP 2
-#define LED_SAT_DN 3
-#define LED_BRI_UP 4
-#define LED_BRI_DN 5
-
 / {
     trackball_listener {
         compatible = "zmk,input-listener";
@@ -67,15 +61,6 @@
             hold-trigger-on-release;
         };
 
-        ledsync: ledsync {
-            compatible = "zmk,behavior-led-layer-sync";
-            #binding-cells = <1>;
-        };
-
-        ledhsb: ledhsb {
-            compatible = "zmk,behavior-led-hsb-adjust";
-            #binding-cells = <1>;
-        };
     };
 
     combos {
@@ -176,10 +161,10 @@
 
         // 7
 
-        Sniper {
-            label = "Sniper";
+        Lighting {
+            label = "Lighting";
             bindings = <
-  &trans  &trans  &ledhsb LED_HUE_UP  &ledhsb LED_SAT_UP  &ledhsb LED_BRI_UP    &ledhsb LED_HUE_DN  &ledhsb LED_SAT_DN  &ledhsb LED_BRI_DN  &trans  &trans
+  &trans  &trans  &rgb_ug RGB_HUI     &rgb_ug RGB_SAI     &rgb_ug RGB_BRI       &rgb_ug RGB_HUD     &rgb_ug RGB_SAD     &rgb_ug RGB_BRD     &trans  &trans
   &trans  &trans  &trans              &trans              &trans                &trans              &trans              &trans              &trans  &trans
   &trans  &trans  &trans              &trans              &trans                &trans              &trans              &trans              &trans  &trans
                   &trans              &trans              &trans                &trans              &trans

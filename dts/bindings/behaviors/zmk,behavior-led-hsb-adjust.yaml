@@ -1,7 +1,0 @@
-# SPDX-License-Identifier: MIT
-
-description: Adjust base layer LED hue, saturation, or brightness
-
-compatible: "zmk,behavior-led-hsb-adjust"
-
-include: one_param.yaml

@@ -1,7 +1,0 @@
-# SPDX-License-Identifier: MIT
-
-description: Sync LED layer rendering to a peripheral
-
-compatible: "zmk,behavior-led-layer-sync"
-
-include: one_param.yaml
