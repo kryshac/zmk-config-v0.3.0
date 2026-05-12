@@ -68,6 +68,7 @@
         diode-direction = "row2col";
         debounce-press-ms = <1>;
         debounce-release-ms = <5>;
+        wakeup-source;
     };
 
     split_inputs {
